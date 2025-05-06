@@ -1,6 +1,5 @@
 package com.controleGastos.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,31 +8,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.controleGastos.model.Despesa;
-import com.controleGastos.service.DespesasService;
+import com.controleGastos.model.Receita;
+import com.controleGastos.service.ReceitaService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/despesas")
-public class DespesasController {
+@RequestMapping("/receitas")
+public class ReceitaController {
 	
-	private DespesasService service;
+	private ReceitaService service;
 	
-	@Autowired
-	public DespesasController(DespesasService service) {
+	public ReceitaController(ReceitaService service) {
 		this.service = service;
 	}
 	
 	@PostMapping("/criar")
-	public ResponseEntity<Despesa> criarDespesa(@Valid @RequestBody Despesa despesa){
-		Despesa despesaSalva = service.CriarDespesa(despesa);
-		return ResponseEntity.status(201).body(despesaSalva);
+	public ResponseEntity<Receita> criarReceita(@Valid @RequestBody Receita receita){
+		Receita receitaSalva = service.criarReceita(receita);
+		return ResponseEntity.status(201).body(receitaSalva);
 	}
 	
 	@GetMapping("/totalMensal")
 	public Double TotalMesReceita(@RequestParam int mes) {
-		return service.SomaDespesaMes(mes);
+		return service.SomaReceitasMes(mes);
 	}
 
 }

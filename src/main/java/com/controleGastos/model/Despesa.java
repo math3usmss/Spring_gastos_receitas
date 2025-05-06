@@ -38,10 +38,7 @@ public class Despesa implements Serializable {
 	public Despesa() {
 	}
 
-	public Despesa(Long id, @NotNull(message = "O valor é obrigatório!") Double valor, String descricao,
-			@FutureOrPresent(message = "A data deve ser hoje ou no futuro!") LocalDate data, String categoria) {
-		super();
-		this.id = id;
+	public Despesa(Double valor, String descricao,LocalDate data, String categoria) {
 		this.valor = valor;
 		this.descricao = descricao;
 		this.data = data;
@@ -50,10 +47,6 @@ public class Despesa implements Serializable {
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Double getValor() {
@@ -74,10 +67,6 @@ public class Despesa implements Serializable {
 
 	public LocalDate getData() {
 		return data;
-	}
-
-	public void setData(LocalDate data) {
-		this.data = data;
 	}
 
 	public String getCategoria() {

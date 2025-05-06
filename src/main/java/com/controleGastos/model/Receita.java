@@ -5,12 +5,14 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 
+@Entity
 public class Receita implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -32,11 +34,10 @@ public class Receita implements Serializable{
 	
 	@Column(nullable = true)
 	private String origem;
+	
+	public Receita() {}
 
-	public Receita(Long id, @NotNull(message = "O valor é obrigatório!") Double valor, String descricao,
-			@FutureOrPresent(message = "A data deve ser hoje ou no futuro!") LocalDate data, String origem) {
-		super();
-		this.id = id;
+	public Receita(Double valor, String descricao,LocalDate data, String origem) {
 		this.valor = valor;
 		this.descricao = descricao;
 		this.data = data;
@@ -47,9 +48,6 @@ public class Receita implements Serializable{
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Double getValor() {
 		return valor;
@@ -69,10 +67,6 @@ public class Receita implements Serializable{
 
 	public LocalDate getData() {
 		return data;
-	}
-
-	public void setData(LocalDate data) {
-		this.data = data;
 	}
 
 	public String getOrigem() {
