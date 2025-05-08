@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.controleGastos.ENUM.origemENUM;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,11 +37,12 @@ public class Receita implements Serializable{
 	private LocalDate data;
 	
 	@Column(nullable = true)
-	private String origem;
+	@Enumerated(EnumType.STRING)
+	private origemENUM origem;
 	
 	public Receita() {}
 
-	public Receita(Double valor, String descricao,LocalDate data, String origem) {
+	public Receita(Double valor, String descricao,LocalDate data, origemENUM origem) {
 		this.valor = valor;
 		this.descricao = descricao;
 		this.data = data;
@@ -69,11 +74,11 @@ public class Receita implements Serializable{
 		return data;
 	}
 
-	public String getOrigem() {
+	public origemENUM getOrigem() {
 		return origem;
 	}
 
-	public void setOrigem(String origem) {
+	public void setOrigem(origemENUM origem) {
 		this.origem = origem;
 	}
 

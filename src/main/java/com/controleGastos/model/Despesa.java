@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.controleGastos.ENUM.categoriasENUM;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,12 +35,12 @@ public class Despesa implements Serializable {
 	private LocalDate data;
 	
 	@Column(nullable = true)
-	private String categoria;
+	private categoriasENUM categoria;
 
 	public Despesa() {
 	}
 
-	public Despesa(Double valor, String descricao,LocalDate data, String categoria) {
+	public Despesa(Double valor, String descricao,LocalDate data, categoriasENUM categoria) {
 		this.valor = valor;
 		this.descricao = descricao;
 		this.data = data;
@@ -69,11 +71,11 @@ public class Despesa implements Serializable {
 		return data;
 	}
 
-	public String getCategoria() {
+	public categoriasENUM getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(categoriasENUM categoria) {
 		this.categoria = categoria;
 	}
 

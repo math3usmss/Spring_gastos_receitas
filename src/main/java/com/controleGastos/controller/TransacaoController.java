@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.controleGastos.dto.TransacaoDTO;
@@ -22,6 +23,11 @@ public class TransacaoController {
 	@GetMapping("/todasTransacoes")
 	public List<TransacaoDTO> listarTransacoes(){
 		return service.listarTransacoes();
+	}
+	
+	@GetMapping("/saldoMensal")
+	public Double saldoMensal(@RequestParam int mes) {
+		return service.SaldoMensal(mes);
 	}
 	
 	

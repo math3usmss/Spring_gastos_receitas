@@ -1,10 +1,12 @@
 package com.controleGastos.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.controleGastos.ENUM.categoriasENUM;
 import com.controleGastos.model.Despesa;
 import com.controleGastos.repository.DespesasRepository;
 
@@ -30,6 +32,15 @@ public class DespesasService {
 	public Double SomaDespesaMes(int mes) {
 		return repository.findAll().stream().filter(data -> data.getData().getMonthValue() == mes)
 				.mapToDouble(valor -> valor.getValor()).sum();
+	}
+	
+	public List<Despesa> listaCategoria(categoriasENUM categoria){
+		return repository.findByCategoria(categoria);
+	}
+	
+	public void deletarDespesa(Long id){
+		repository.deleteById(id);
+		repository.flush();
 	}
 
 }

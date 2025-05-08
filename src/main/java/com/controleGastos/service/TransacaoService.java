@@ -14,10 +14,15 @@ public class TransacaoService {
 	
 	private ReceitaRepository receitaRepository;
 	private DespesasRepository despesasRepository;
+	private ReceitaService receitaService;
+	private DespesasService despesaService;
 	
-	public TransacaoService(ReceitaRepository receitaRepository,DespesasRepository despesasRepository) {
+	public TransacaoService(ReceitaRepository receitaRepository,DespesasRepository despesasRepository,
+			ReceitaService receitaService, DespesasService despesaService) {
 		this.receitaRepository = receitaRepository;
 		this.despesasRepository = despesasRepository;
+		this.receitaService = receitaService;
+		this.despesaService = despesaService;
 	}
 	
 	public List<TransacaoDTO> listarTransacoes(){
@@ -27,18 +32,22 @@ public class TransacaoService {
 		receitaRepository.findAll().forEach(receita -> {
 			transacoes.add(new TransacaoDTO(receita.getId(), 
 					receita.getValor(), receita.getData(), 
-					receita.getDescricao(), "RECEITA", receita.getOrigem()));
+					receita.getDescricao(), "RECEITA", receita.getOrigem(), null));
 		});
 		
 		despesasRepository.findAll().forEach(despesa -> {
 			transacoes.add(new TransacaoDTO(despesa.getId(), 
 					despesa.getValor(), despesa.getData(), 
-					despesa.getDescricao(), "DESPESA", despesa.getCategoria()));
+					despesa.getDescricao(), "DESPESA", null, despesa.getCategoria()));
 		});
 		
 		
 		return transacoes;
 		
+	}
+	
+	public Double SaldoMensal(int mes){
+		return receitaService.SomaReceitasMes(mes) - despesaService.SomaDespesaMes(mes);
 	}
 	
 	
